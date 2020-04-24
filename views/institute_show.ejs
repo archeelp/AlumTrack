@@ -1,0 +1,57 @@
+<% include partials/header %>
+  <div class="container text-center">   
+      <h1></h1>
+    <div class="x">
+            <img class="img" class="img-responsive" src="<%= institute.image %>" width="300px" height="300px" style="border-radius: 50%;">
+            </div>
+           <% if(currentuser && institute._id.equals(currentuser._id)){%>
+            <br>
+            <div>
+                <a id="button" class="btn btn-primary" href="/update_profile">Update Profile</a>
+            </div><%}%>
+            <br>
+            <a class="btn btn-primary" href = "mailto: <%= institute.email %>">Send Email</a>
+            <h1><%= institute.fname %> <%= +institute.lname %></h1>
+            <br>
+            <a class="btn btn-primary" href = "/viewblog/<%= institute._id %>">View Blog</a>
+            <br>
+            <p style="font-weight: 800; font-size: 125%"><%= "Email: " + institute.email %></p>
+            
+            <div class="address">
+            <legend style="font-size: 125%;">Address</legend>
+            
+            <p style="font-size: 125%;"><%= institute.address %></p>
+            <div id="viewDiv">
+                <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= institute.loc.y %>,<%= institute.loc.x %>&amp;key=AIzaSyAPzLdcKEPCe4SQf3-cdSnq5vmh_MRaHCs"></iframe>
+            </div>
+        </div>
+        
+            <div style="padding: 1%;" class="description">
+                <legend>About Dr <%= institute.fname + " " +institute.lname %></legend>
+                <p id="description"><%= institute.description %></p>
+            </div>
+            <div class="appreciation">
+            <h3>Recommendations</h3>
+            <% institute.appreciations.forEach(function(appreciation){ %>
+                <div class="inline-block"style="font-size: 125%;">
+                    <strong><%= appreciation.author.username %></strong> - <%= appreciation.text %> 
+                    <% if(currentuser && appreciation.author.id.equals(currentuser._id)){ %>
+                        <form id="delete-form" action="/alumni/<%=appreciation._id %>/deleterecommendation" method="POST">
+                            <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                        </form>
+                    <% } %>
+                </div>
+            <% }) %>
+            <% if(currentuser && currentuser.id != institute._id) {%>
+                <form action="/institute/<%= institute._id %>/newrecommendation" method="POST">
+                    <div class="form-group">
+                        <input style="font-size: 125%;" class="form-control s" type="text" name="text" placeholder="Add Recommendation">
+                    </div>
+                    <div class="form-group">
+                        <button id="btn" class="btn btn-primary ">Add Recommendation</button>
+                    </div>
+                </form>
+            <% } %>
+  </div>
+  <br><br>
+<% include partials/footer %>

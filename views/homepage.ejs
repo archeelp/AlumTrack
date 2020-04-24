@@ -1,7 +1,8 @@
 <% include partials/header %>
 <style>
     body {
-        background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("https://cclponline.org/wp-content/uploads/2015/01/health-priorities-1080x675.jpg") no-repeat center center fixed;
+        /*background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,.5)), url("https://cclponline.org/wp-content/uploads/2015/01/health-priorities-1080x675.jpg") no-repeat center center fixed;*/
+        background: white;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -14,14 +15,14 @@
         font-family: 'Courgette', cursive;
     }
     .jumbotron {
-        background-color: rgba(255, 250, 250, 0);
+        background-color: white;/*rgba(255, 250, 250, 0);*/
     }
     footer {
         background-color: #212121;
     }
     #logof {
         font-family: 'Courgette', cursive;
-        font-size: 500%;
+        font-size: 300%;
         margin-top: 3%;
         color: white;
     }
@@ -36,35 +37,344 @@
         font-size: 125%;
         margin-top: 9%;
     }
+
+    .box{
+    background: linear-gradient(180deg, grey 0%, grey 100%); /*e52d27  b31217*/
+    font-family: 'Nanum Gothic', sans-serif;
+    border-radius: 25px 0;
+    position: relative;
+    overflow: hidden;
+}
+.box:before,
+.box:after,
+.box .box-content:before,
+.box .box-content:after{
+    content: "";
+    background: #fff;
+    width: 50%;
+    height: 4px;
+    transform: scaleX(0);
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1;
+    transition: all 600ms ease;
+}
+.box:after{
+    top: auto;
+    bottom: 15px;
+    left: auto;
+    right: 15px;
+}
+.box .box-content:before,
+.box .box-content:after{
+    width: 4px;
+    height: 50%;
+    transform: scaleY(0);
+}
+.box .box-content:after{
+    left: auto;
+    right: 15px;
+    top: auto;
+    bottom: 15px;
+}
+.box:hover:before,
+.box:hover:after,
+.box:hover .box-content:before,
+.box:hover .box-content:after{
+    transform: scale(1);
+}
+.box img{
+    width: 100%;
+    height: auto;
+    transform: scale3d(1.1, 1.1, 1);
+    transition: all 0.25s linear;
+}
+.box:hover img{
+    opacity: 0.25;
+    transform: scale(1.25);
+}
+.box .inner-content{
+    color: #fff;
+    text-align: center;
+    width: 70%;
+    opacity: 0;
+    transform: translateX(-50%) translateY(-50%);
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transition: all 600ms ease;
+}
+.box:hover .inner-content{
+    opacity: 1;
+    top: 50%;
+}
+.box .title{
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 3px;
+}
+.box .post{
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0 0 12px;
+    display: block;
+}
+.box .icon{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.box .icon li{
+    display: inline-block;
+    margin: 0 4px;
+}
+.box .icon li a{
+    color: #fff;
+    font-size: 18px;
+    line-height: 32px;
+    height: 35px;
+    width: 35px;
+    border: 2px solid #fff;
+    border-radius: 10px 0 10px 0;
+    display: block;
+    transition: all 0.3s;
+}
+.box .icon li a:hover{
+    color: grey;
+    background: #fff;
+    border-radius: 0 10px 0 10px;
+}
+@media only screen and (max-width:990px){
+    .box { margin: 0 0 30px; }
+}
+
+.serviceBox{
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    text-align: right;
+    padding: 0 40px 10px 10px;
+    position: relative;
+    z-index: 1;
+}
+.serviceBox:before{
+    content: '';
+    background: linear-gradient(to bottom,#10ac84,#10ac84,transparent);
+    height: calc(100% - 50px);
+    width: 25px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
+.serviceBox .service-icon{
+    color: #10ac84;
+    background-color: #fff;
+    font-size: 45px;
+    text-align: center;
+    line-height: 85px;
+    height: 105px;
+    width: 105px;
+    margin: 0 -40px 10px 0;
+    border: 12px solid #10ac84;
+    box-shadow:0 0 5px rgba(0,0,0,0.5) inset, 0 0 10px rgba(0,0,0,0.4);
+    border-radius: 50%;
+    display: inline-block;
+}
+.serviceBox:hover .service-icon i{
+    transform: rotate(360deg);
+    transition: all 0.3s;
+}
+.serviceBox .title{
+    color: #10ac84;
+    font-size: 19px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: left;
+    margin: 0 0 10px;
+}
+.serviceBox .description{
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+    text-align: justify;
+    margin: 0 0 10px;
+}
+.serviceBox.red:before{ background: linear-gradient(to bottom,#000000,#000000,transparent); }
+.serviceBox.red .service-icon{
+    color: #000000;
+    border-color: #000000;
+}
+.serviceBox.red .title{ color:  grey; }
+.serviceBox.blue:before{ background: linear-gradient(to bottom,#2e86de,#2e86de,transparent); }
+.serviceBox.blue .service-icon{
+    color: #2e86de;
+    border-color: #2e86de;
+}
+.serviceBox.blue .title{ color: #2e86de; }
+.serviceBox.purple:before{ background: linear-gradient(to bottom,#592ab7,#592ab7,transparent); }
+.serviceBox.purple .service-icon{
+    color: #592ab7;
+    border-color: #592ab7;
+}
+.serviceBox.purple .title{ color: #592ab7; }
+@media only screen and (max-width:990px){
+    .serviceBox{ margin: 0 0 30px; }
+}
 </style>
 <div class="main-body">
  <div class="container">
-     <header class="jumbotron">
-         <%if(!currentuser){%>
-            <div class="container">
-                    <h1>Welcome To <span>ClinicApp</span></h1>
-                 </div>
-         <%}
-        else{%>
-            <div class="container">
-                    <h1>Welcome To <span>ClinicApp </span><%= currentuser.fname.toUpperCase()%> </h1>
-               </div>
-        <%}%>
-        </header>
+     <div class="row">
+         <div class="col-sm">
+            <header class="">
+                <%if(!currentuser){%>
+                   <div class="container" style="padding-top: 25%;">
+                           <h1 style="color: black; font-size: 40px;">Welcome To <span>AlumTrack</span></h1>
+                           <h3 style="font-weight: 600; color:black; font-size: 30px;">Everything you need to keep your alumni engaged!</h3>
+                        </div>
+                <%}
+               else{%>
+                   <div class="container" style="padding-top: 25%;">
+                           <h1 style="color: black; font-size: 40px;">Welcome To <span>AlumTrack </span><%= currentuser.fname.toUpperCase()%> </h1>
+                      </div>
+               <%}%>
+               </header>
+         </div>
+         <div class="col-sm">
+             <img src="https://image.freepik.com/free-vector/business-team-discussing-ideas-startup_74855-4380.jpg" alt="">
+         </div>
+     </div>
 </div>
 <div class="container">
-    <header class="jumbotron">
+    <header class="">
         <div class="container">
-            <p style="font-weight: 600; color:black;">Clinic management systems are computer software products that coordinate and integrate all the inherent activities involved in the management and running of a healthcare facility. They must meet specified security, technology and functionality standards for managing electronic medical records and practice management information. Some systems maintain the complete Patient Information coupled with the electronic medical records (EMR), medical billing, EDI/HCFA claim sending and meeting the stipulated security, technology & functional standards.</p>
 
-                   <p style="font-weight: 600; color:black;"> Aside from general patient care, a clinic may also participate in running clinical trials. In order to manage the additional responsibilities in managing a clinical trial, a clinic may also use a CTMS or clinical data management system (CDMS) in addition to and combined with their EMR and billing systems.</p>
-                    
-                 <p style="font-weight: 600; color:black;">Healthcare computer system, commonly known as clinic management system, is created to computerize manual operations in clinics. The primary purpose is to digitize patient records so as to make data retrieval easy and efficient. Being in the digital form, patient data can be conveniently shared and accessed by multiple simultaneous users at different locations, resulting in smoother clinical operations and collaboration among clinicians. It also means that patient data can be easily backed up, and be protected for confidentiality and from tampering through access control. In addition, clinical tasks involving panel billing, inventory management and accounting are all made easy, and in some manner automated. Economically, clinics benefit from constant cost savings as a result of increased productivity and overall efficiency. Essentially, everyone in the clinic benefits from the system – doctor, nurse, clerk, administrator and the clinic owner – which makes their lives easy and removes unnecessary human errors from their daily activities.</p>
+
+                   <p style="font-weight: 600; color:black; font-size: 18px;">Alum Track is a one-stop solution for all your alumni networking needs. Our interactive alumni portals come with all the features required to manage your alumni relations seamlessly while keeping your alumni engaged & happy.</p>
+                   <br>
+                   <div class="row">
+                       <div class="col-md-4">
+                            <img width="80%" height="100%" src="https://image.freepik.com/free-vector/online-world-concept-illustration_114360-1092.jpg" alt="">
+                       </div>
+                       <div class="col-md-8">
+                            <h4 style="padding-top: 10%;">Alumni Networking</h4>
+                            <h6>Alum Track is a social network specifically designed for career and business professionals to connect. Many professionals use Alum Track to cultivate their careers and businesses. Unlike other social networks in which you might become "friends" with anyone and everyone.</h6>
+                       </div>
+                   </div>
+                   <br>
+                   <div class="row">
+                        <div class="col-md-8">
+                            <h4 style="padding-top: 10%;">Alumni Search</h4>
+                            <h6>Alum Track uses proprietary algorithms to rank and order the results you get when you search for people on the site. There is no single rank for Alum Track search. Unlike the standard search engines, a Alum Track people search generates its relevance score uniquely for each member.</h6>
+                    </div>
+                        <div class="col-md-4">
+                            <img width="80%" height="100%" src="https://image.freepik.com/free-vector/recruiting-professionals-studying-candidate-profiles_1262-21404.jpg" alt="">
+                        </div>
+                    </div>
+                    <br>
+                   <div class="row">
+                       <div class="col-md-4">
+                            <img width="80%" height="100%" src="https://image.freepik.com/free-vector/recruit-agent-analyzing-candidates_74855-4565.jpg" alt="">
+                       </div>
+                       <div class="col-md-8">
+                            <h4 style="padding-top: 10%;">Job Postings</h4>
+                            <h6>Posting your job on Alum Track allows you to reach the world's largest professional network to connect your job with qualified candidates. You can post your job opening in minutes, track applicants, and share top picks with your team to gather valuable feedback.</h6>
+                       </div>
+                   </div>
+                   <br>
+                   <!--
+                    <div class="container">
+    <br> <h4 style="font-size: 30px;">Why Us?</h4> <br>
+  <div class="row">
+      <div class="col-md-3 col-sm-6">
+          <div class="serviceBox red">
+              <div class="service-icon">
+                  <span><i class="fa fa-globe"></i></span>
+              </div>
+              <h3 class="title">Web Development</h3>
+              <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="serviceBox red">
+              <div class="service-icon">
+                  <span><i class="fa fa-rocket"></i></span>
+              </div>
+              <h3 class="title">Web Development</h3>
+              <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="serviceBox red">
+              <div class="service-icon">
+                  <span><i class="fa fa-mobile"></i></span>
+              </div>
+              <h3 class="title">Web Development</h3>
+              <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+          </div>
+      </div>
+      <div class="col-md-3 col-sm-6">
+          <div class="serviceBox red">
+              <div class="service-icon">
+                  <span><i class="fa fa-briefcase"></i></span>
+              </div>
+              <h3 class="title">Web Development</h3>
+              <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quaerat fugit quas veniam perferendis repudiandae sequi, dolore quisquam illum.</p>
+          </div>
+      </div>
+  </div>
+</div>  
+<br>
+<div class="container">
+    <br> <h4 style="font-size: 30px;">Gallery</h4> <br>
+  <div class="row">
+      <div class="col-md-4 col-sm-6">
+          <div class="box">
+              <img src="images/img-2.jpg">
+              <div class="box-content">
+                  <div class="inner-content">
+                      <h3 class="title">Title</h3>
+                      <span class="post">Subtitle</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <div class="box">
+              <img src="images/img-2.jpg">
+              <div class="box-content">
+                  <div class="inner-content">
+                      <h3 class="title">Miranda Roy</h3>
+                      <span class="post">Web developer</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+          <div class="box">
+              <img src="images/img-2.jpg">
+              <div class="box-content">
+                  <div class="inner-content">
+                      <h3 class="title">Miranda Roy</h3>
+                      <span class="post">Web developer</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+                   -->
        </div>
 </header>
 </div>
+<br>
+<footer class="footer mt-auto py-3 text-center">
 
-<footer class="page-footer font-small blue pt-4">
+    <h3 style="color: white;">Our Customers Love Us</h3>
 
     <!-- Footer Links -->
     <div class="container-fluid text-center text-md-left">
@@ -73,10 +383,10 @@
       <div class="row">
   
         <!-- Grid column -->
-        <div class="col-md-6 mt-md-0 mt-3">
+        <div class="col-md-5 mt-md-0 mt-3">
   
           <!-- Content -->
-          <p id="logof" class>ClinicApp</p>
+          <p id="logof" class>ALUMTRACK</p>
   
         </div>
         <!-- Grid column -->
@@ -93,6 +403,13 @@
                  </li>
           </ul>
   
+        </div>
+        <div class="col-md-2 mb-md-0 mb-5">
+            <ul class="list-unstyled">
+                <i class="fa fa-facebook" style="color: white;" aria-hidden="true"> AlumTrack</i>
+                <i class="fa fa-instagram" style="color: white;" aria-hidden="true"> AlumTrackOfficial</i>
+                <i class="fa fa-twitter" style="color: white;" aria-hidden="true"> ATrack</i>
+            </ul>
         </div>
       </div>
       <!-- Grid row -->

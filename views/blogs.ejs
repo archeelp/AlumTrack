@@ -1,0 +1,92 @@
+<% include partials/header %>
+<br>
+<div class="container">
+
+    <!--- \\\\\\\Post-->
+    <div class="card gedf-card">
+        <div class="nav-item">
+            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="true">Make
+                a publication</a>
+            </div>
+        <div class="card-body">
+            <form action="/newblog" method="POST">
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                        <div class="form-group">
+                            <textarea name="text" class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="message" rows="3" name="url" placeholder="Image url"></input>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-toolbar justify-content-between">
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary">share</button>
+                    </div>
+                    <div class="btn-group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="fa fa-globe"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                            <a class="dropdown-item" href="#"><i class="fa fa-globe"></i> Public</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-users"></i> Friends</a>
+                            <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Just me</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br>
+<% blogs.forEach(function(blog){ %>
+    <div class="card gedf-card">
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                        <img class="rounded-circle" width="45" src="data:image/jpeg;base64,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" alt="">
+                    </div>
+                    <div class="ml-2">
+                        <div class="h5 m-0">@<%= blog.author.username %></div>
+                        <div class="h7 text-muted">Location</div>
+                    </div>
+                </div>
+                <div>
+                    <div class="dropdown">
+                        <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-ellipsis-h"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                            <div class="h6 dropdown-header">Configuration</div>
+                            <a class="dropdown-item" href="#">Save</a>
+                            <a class="dropdown-item" href="#">Hide</a>
+                            <a class="dropdown-item" href="#">Report</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <img src="<%= blog.url %>" class="card-img-top" alt="...">
+        <div class="card-body">
+            <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i><%= blog.date %></div>
+            <a class="card-link" href="#">
+                <h5 class="card-title">Title</h5>
+            </a>
+
+            <p class="card-text">
+                <%= blog.text %>
+            </p>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
+            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+        </div>
+    </div>
+    <br>
+<% }); %>
+<br>
+</div>
+<% include partials/footer %>

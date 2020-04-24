@@ -1,0 +1,132 @@
+<% include partials/header %>
+<style>
+    #button {
+        text-align: center;
+    }
+    input[type="checkbox"] {
+        margin-right: 5px;
+        margin-top: 5px;
+    }
+    .pding {
+        padding-left: 50px;
+    }
+    input[type="number"] {
+        width: 50px;
+    }
+    .submitButton {
+        height: 40px;
+        background: #0062ff;
+        border: none;
+        color: white;
+        border-radius: 18px;
+        font-weight: bold;
+        font-size: 125%;
+    }
+    .notVisible {
+        display: none;
+    }
+    .textarea {
+        width: 100%;
+        height: 125px;
+        font-size: 2.0rem;
+        text-align: left;
+        padding: 5px;
+    }
+    #lbl {
+        margin-top: 1%;
+        font-size: 150%;
+    }
+</style>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font: 16px Arial;  
+    }
+    
+    /*the container must be positioned relative:*/
+    .autocomplete {
+      position: relative;
+      display: inline-block;
+    }
+    
+    input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 10px;
+      font-size: 16px;
+    }
+    
+    input[type=text] {
+      background-color: #f1f1f1;
+      width: 100%;
+    }
+    
+    input[type=submit] {
+      background-color: DodgerBlue;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+    
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff; 
+      border-bottom: 1px solid #d4d4d4; 
+    }
+    
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+      background-color: #e9e9e9; 
+    }
+    
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+      background-color: DodgerBlue !important; 
+      color: #ffffff; 
+    }
+</style>
+<div class="container text-center">
+        <h1 style="text-align: center"><u>University Details</u></h1>
+        <div style="width: 70%; margin: 25px auto;">
+                <legend>Add a brief description</legend>
+            <form autocomplete="off" id="form" action="/fill_details_institute/<%= pm.id %>" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <textarea class="textarea" form="form" class="form-control" name="description" placeholder="Description" required></textarea>
+                </div>
+                <fieldset>
+                    <div class="form-group">
+                        <div class="form-group">
+                            <legend style="margin-top: 1%;">Address</legend>
+                            <textarea class="textarea" form="form" name="address" placeholder="Address" id=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <legend id="lbl" for="image">Profile Photo</legend>
+                            <input type="file" cl id="image" name="image" accept="image/*" required>
+                        </div>
+                        
+                    </div>
+                </fieldset>
+                <br>
+                <div style="text-align: center">
+                    <button style="width: 20%" class="submitButton">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    
+<% include partials/footer %>

@@ -6,7 +6,7 @@ var userSchema = new mongoose.Schema({
     username: String,
     password: String,
     address: String,
-    image:String,
+    image:{ type : String ,default:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkDM78IoAieoxU-s9Z2FqmT02Nv9IujYs8l199PVP68H94TEZd&usqp=CAU"},
     image_id: String,
     type: String,
     fname: String,
@@ -16,29 +16,58 @@ var userSchema = new mongoose.Schema({
 	authenticationKey: String,
     description: String,
     address: String,
+    institute:[
+        {   
+            name: String,
+            branch: String,
+            graduation_date : String,
+            verified : {type:Boolean,default:false},
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "user"
+            }
+        }
+    ],
+    skills:[
+        String
+    ],
+    profiles:[
+        String
+    ],
     loc:{
         x:String,
         y:String
     },
-    schedule : [
+    appreciations: [
         {
-            day : String,
-            from : String,
-            to : String
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "appreciation"
         }
     ],
-    reviews: [
+    blogs: [
         {
            type: mongoose.Schema.Types.ObjectId,
-           ref: "review"
+           ref: "blog"
         }
-     ],
-    appointments: [
+    ],
+    sent: [
         {
            type: mongoose.Schema.Types.ObjectId,
-           ref: "appointment"
+           ref: "user"
         }
-     ]
+    ],
+    recieved: [
+        {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "user"
+        }
+    ],
+    accepted: [
+        {
+           type: mongoose.Schema.Types.ObjectId,
+           ref: "user"
+        }
+    ]
 });
 
 userSchema.plugin(passportLocalMongoose)

@@ -1,0 +1,70 @@
+<% include partials/header %>
+<style>
+    .search {
+        margin-bottom: 1%;
+        text-align: center;
+    }
+    img {
+        border-radius: 50%;
+    }
+</style>
+<br>
+<br>
+ <div class="container">
+            <%if(noMatch){%>
+            <h1 style="text-align: center;"><%= noMatch %></h1>
+            <%}else{%>
+      <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% alumnis.forEach(function(alumni){
+            if(alumni.type == "alumni"&&alumni.address) {%>
+            <div class="card col-md-6 col-sm-6 text-center">
+                <div class="thumbnail text-center">
+                   <div class="caption">
+                       <h3><%= alumni.fname %></h3>
+                   </div>
+                  <div class="text-center">    
+            <img class="img" class="img-responsive" src="<%= alumni.image %>" height="100px" width="100px"><br>
+                </div>
+            <p style="font-size: 130%;">
+                       <% if(String(alumni.description).length > 60) {%>
+                        <%= String(alumni.description).slice(0,60) + "..." %>
+                        <%} else{%>
+                        <%= String(alumni.description)%>
+                        <%}%>
+                    </p> 
+                    <p style="font-size: 140%;">
+                        <% if(String(alumni.address).length > 40) {%>
+                            <%= String(alumni.address).slice(0,40) + "..." %>
+                            <%} else{%>
+                            <%= String(alumni.address)%>
+                            <%}%>
+                    </p>
+                    <% if(currentuser && currentuser.type =="alumni" && alumni._id != currentuser.id){ %>
+                    <% if(currentuser.sent.includes(alumni._id)){ %>
+                        <p> Request sent</p>
+                    <% } else if(currentuser.recieved.includes(alumni._id)){ %>
+                        <p>
+                            <a href="/accept_request/<%= alumni.id %>" class="btn btn-primary">Accept Request</a>
+                        </p>
+                    <% } else if(currentuser.accepted.includes(alumni._id)){ %>
+                        <p>Friends</p>
+                    <% } else { %>
+                        <p>
+                            <a href="/send_request/<%= alumni.id %>" class="btn btn-primary">Send Request</a>
+                        </p>
+                    <% }} %>
+                    <% if(currentuser && currentuser.type=="university" && currentuser.recieved.includes(alumni._id)){ %>
+                        <p>
+                            <a href="/accept_request/<%= alumni.id %>" class="btn btn-primary">Accept Request</a>
+                        </p>
+                    <% } %>
+                   <p>
+                       <a href="/alumni/<%= alumni.id %>" class="btn btn-primary">More Info</a>
+                   </p>
+                </div>
+            </div>
+        <% }}); %>
+    </div>
+</div><%}%>
+<br><br>
+<% include partials/footer %>

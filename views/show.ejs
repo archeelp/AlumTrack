@@ -1,249 +1,223 @@
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <!--
-    ArcGIS API for JavaScript, https://js.arcgis.com
-    For more information about the intro-mapview sample, read the original sample description at developers.arcgis.com.
-    https://developers.arcgis.com/javascript/latest/intro-mapview/index.html
-    -->
-    <title>CLIINIC APP</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/4.8/esri/css/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://previews.123rf.com/images/jroblesart/jroblesart1501/jroblesart150100031/35459605-medical-symbol-caduceus-with-snakes-and-wings.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=DM+Serif+Text&display=swap" rel="stylesheet">
-    <style>
-         h1 {
-        font-family: 'Open Sans', sans-serif;
-        }
-        #description {
-            font-size: 125%;
-            font-weight: 500;
-        }
-        .description {
-            border: 1px solid rgba(0,0,0,0.2);
-            padding-left: 5px;
-        }
-        th {
-            font-size: 125%;
-            text-align: left;
-        }
-        #button {
-            font-weight: bold;
-            padding: auto;
-            font-size: 110%;
-            margin: 1% 0 0 3%;
-        }
-        .review {
-            border: 1px solid rgba(0,0,0,0.2);
-            padding-left: 1%;
-            padding-right: 1%;
-            margin-bottom: 3%;
-        }
-        #delete {
-            display: inline;
-        }
-        .address {
-            border: 1px solid rgba(0, 0, 0, 0.2);
-            margin-bottom: 1%;
-            width: 60%;
-            padding-left: 1%;
-            padding-right: 1%;
-            padding-top: 1%;
-            float: inherit;
-        }
-        .img {
-            height: 200px;
-            width: 200px;
-            border-radius: 50%;
-        }
-        .x {
-            position: relative;
-            justify-content: center;
-            overflow: hidden;
-        }
-        #viewDiv {
-            padding: 0;
-            margin: 0;
-            height: 45%;
-        }
-        #logo {
-            font-family: 'Courgette', cursive;
-            font-size: 150%;
-        }
-        a {
-            font-size: 120%;
-        }
-    </style>
-  <script src="https://js.arcgis.com/4.8/"></script>
-</head>
-
-<body>
-        <nav class="navbar navbar-default">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <a id="logo" class="navbar-brand" href="/">ClinicApp</a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="/doctors">View Doctors</a></li>
-                            <% if(!currentuser){ %>
-                            <li><a href="/signin">Login</a></li>
-                            <li><a href="/signup">Sign-up</a></li>
-                            <% } else { 
-                                if(currentuser.type == "doctor"){ %>
-                                    <li><a href="#">Signed In As Dr <%= currentuser.fname %></a></li>
-                                    <% if(!currentuser.description){ %>
-                                    <li><a href="/details/<%= currentuser._id %>">Add Details</a></li>
-                                    <% } %>
-                                    <li><a href="/aplist">Appointments</a></li>
-                                    <li><a href="/stats">Stats</a></li>
-                                <% } 
-                                if(currentuser.type == "patient"){ %>
-                                    <li><a href="#">Signed In As <%= currentuser.fname %></a></li>
-                                    <li><a href="/patienthome">My Appointments</a></li>
-                                <% } %>
-                            <li><a href="/logout">Logout</a></li>
-                            <% } %>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div class="container">
-        
-                <% if(error && error.length > 0){ %>
-                    <div class="alert alert-danger" role="alert">
-                        <%= error %>
-                    </div>
-                <% } %>
-                <% if(success && success.length > 0){ %>
-                    <div class="alert alert-success" role="alert">
-                        <%= success %>
-                    </div>
-                <% } %>
-                <% if(warning && warning.length > 0){ %>
-                    <div class="alert alert-warning" role="alert">
-                        <%= warning %>
-                    </div>
-                <% } %>
-                <% if(info && info.length > 0){ %>
-                    <div class="alert alert-info" role="alert">
-                        <%= info %>
-                    </div>
-                <% } %>
-            </div>
-  <div class="container">   
+<% include partials/header %>
+  <div class="container text-center">   
       <h1></h1>
-    <div class="x">    
-            <img class="img" class="img-responsive" src="<%= doctor.image %>" width="200px" height="500px"><br>
+    <div class="x">
+            <img class="img" class="img-responsive" src="<%= alumni.image %>" width="300px" height="300px" style="border-radius: 50%;">
             </div>
-           <% if(currentuser && doctor._id.equals(currentuser._id)){%>
+            <% if(currentuser && currentuser.type =="alumni" && alumni._id != currentuser.id){ %>
+                <% if(currentuser.sent.includes(alumni._id)){ %>
+                    <p> Request sent</p>
+                <% } else if(currentuser.recieved.includes(alumni._id)){ %>
+                    <p>
+                        <a href="/accept_request/<%= alumni.id %>" class="btn btn-primary">Accept Request</a>
+                    </p>
+                <% } else if(currentuser.accepted.includes(alumni._id)){ %>
+                    <p>Friends</p>
+                <% } else { %>
+                    <p>
+                        <a href="/send_request/<%= alumni.id %>" class="btn btn-primary">Send Request</a>
+                    </p>
+                <% }} %>
+                <% if(currentuser && currentuser.type =="institute" && currentuser.recieved.includes(alumni._id)){ %>
+                    <p>
+                        <a href="/accept_request/<%= alumni.id %>" class="btn btn-primary">Accept Request</a>
+                    </p>
+                <% } %>
+           <% if(currentuser && alumni._id.equals(currentuser._id)){%>
+            <br>
             <div>
-                <a id="button" class="btn btn-primary" href="/picupdate">Update Profile</a>
+                <a id="button" class="btn btn-primary" href="/update_profile">Update Profile</a>
             </div><%}%>
-            <h1><%= "Dr " + doctor.fname + " " +doctor.lname %></h1>
-            
-            <p style="font-weight: 800; font-size: 125%"><%= "Email: " + doctor.email %></p>
+            <br>
+            <a class="btn btn-primary" href = "mailto: <%= alumni.email %>">Send Email</a>
+            <h1><%= + alumni.fname + " " +alumni.lname %></h1>
+            <br>
+            <a class="btn btn-primary" href = "/viewblog/<%= alumni._id %>">View Blog</a>
+            <br>
+            <p style="font-weight: 800; font-size: 125%"><%= "Email: " + alumni.email %></p>
             
             <div class="address">
             <legend style="font-size: 125%;">Address</legend>
             
-            <p style="font-size: 125%;"><%= doctor.address %></p>
-            <div id="viewDiv"></div>
+            <p style="font-size: 125%;"><%= alumni.address %></p>
+            <div id="viewDiv">
+                <iframe width="100%" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=<%= alumni.loc.y %>,<%= alumni.loc.x %>&amp;key=AIzaSyAPzLdcKEPCe4SQf3-cdSnq5vmh_MRaHCs"></iframe>
+            </div>
         </div>
         
             <div style="padding: 1%;" class="description">
-                <legend>About Dr <%= doctor.fname + " " +doctor.lname %></legend>
-                <p id="description"><%= doctor.description %></p>
+                <legend>About Dr <%= alumni.fname + " " +alumni.lname %></legend>
+                <p id="description"><%= alumni.description %></p>
             </div>
-            <fieldset>
-                <h3>Available Timings</h3>
-                <table class="table table-borderless" >
-                    <tr>
-                    <th>Day</th>
-                    <th>From</th> 
-                    <th>To</th>
-                    </tr>
-                <% doctor.schedule.forEach(function(schedule){ %>
-                    <tr>
-                        <td><%= schedule.day.toUpperCase() %></td>
-                        <td><%= schedule.from + ":00" %></td> 
-                        <td><%= schedule.to + ":00" %></td>
-                    </tr>
-                <% }) %>
-                </table>
-            </fieldset>
-            <%if(currentuser && doctor._id.equals(currentuser._id)){%>
-            <div>
-                <a style="font-weight: bold;" class="btn btn-primary" href="/profileupdate">Update Appointment Schedule</a>
-        </div><% } %>
-            <% if((!currentuser)||(currentuser.type=="patient")) {%>
-            <div>
-                    <a class="btn btn-success" href="/doctors/<%= doctor._id %>/bookappointment">Book An Appointment</a>
-            </div>
-            <% } %>
-            <%
-            var i=0,sum=0;
-            doctor.appointments.forEach(function(appointment){
-                if(appointment.status=="CNF")
-                {
-                    sum+=Number(appointment.billamount);
-                    i++;
-                }
-            })
-            var acpu=Math.round(sum/i);%>
-            <h4><strong>Average Consulting Charges:</strong> <%=acpu%></h4>
-            <div class="review">
-            <h3>REVIEWS</h3>
-            <% doctor.reviews.forEach(function(review){ %>
-                <p style="font-size: 125%;">
-                    <strong><%= review.author.username %></strong> - <%= review.text %> 
-                    <% if(currentuser && review.author.id.equals(currentuser._id)){ %>
-                        <form id="delete-form" action="/doctors/<%=review._id %>/deletereview" method="POST">
+            <div class="appreciation">
+            <h3>Recommendations</h3>
+            <% alumni.appreciations.forEach(function(appreciation){ %>
+                <div class="inline-block"style="font-size: 125%;">
+                    <strong><%= appreciation.author.username %></strong> - <%= appreciation.text %> 
+                    <% if(currentuser && appreciation.author.id.equals(currentuser._id)){ %>
+                        <form id="delete-form" action="/alumni/<%=appreciation._id %>/deleterecommendation" method="POST">
                             <input type="submit" class="btn btn-xs btn-danger" value="Delete">
                         </form>
                     <% } %>
-                </p>
+                </div>
+            <% }) %>
+            <b>SKILLS</b>
+            <% alumni.skills.forEach(function(skill){ %>
+                <div><%= skill %></div>
+            <% }) %>
+            <% if(currentuser && currentuser.id == alumni._id) {%>
+                <form autocomplete="off" action="/alumni/adduniversity" method="POST">
+                    <div class="autocomplete">
+                        <label>University Name</label>
+                        <input id="myInput" type="text" name="university" placeholder="University">
+                    </div>
+                    <label>Graduation Year</label>
+                    <input name="year" placeholder="Year">
+                    <label>Branch</label>
+                    <input name="branch" placeholder="Branch">
+                    <div class="form-group">
+                        <button id="btn" class="btn btn-primary ">Add University</button>
+                    </div>
+                </form>
+                <br>
+                <form autocomplete="off" action="/alumni/addskill" method="POST">
+                    <label>Skill</label>
+                    <input name="skill" placeholder="skill">
+                    <div class="form-group">
+                        <button id="btn" class="btn btn-primary ">Add Skill</button>
+                    </div>
+                </form>
+                <br>
+            <% } %>
+            <% if(currentuser && currentuser.id != alumni._id) {%>
+                <form action="/alumni/<%= alumni._id %>/newrecommendation" method="POST">
+                    <div class="form-group">
+                        <input style="font-size: 125%;" class="form-control s" type="text" name="text" placeholder="Add Recommendation">
+                    </div>
+                    <div class="form-group">
+                        <button id="btn" class="btn btn-primary ">Add Recommendation</button>
+                    </div>
+                </form>
+            <% } %>
+            <h3>Institute</h3>
+            <% alumni.institute.forEach(function(i){ %>
+                <div><%= i.name %><%= i.verified %></div>
             <% }) %>
   </div>
-
-    <script>
-        require(["esri/Map", "esri/views/MapView"], function(Map, MapView) {
-        const map = new Map({
-            basemap: "streets-navigation-vector"
-        });
-
-        const view = new MapView({
-            container: "viewDiv",
-            map: map,
-            zoom: 15,
-            center: {
-            latitude: <%-doctor.loc.y%>,
-            longitude: <%-doctor.loc.x%>
+  <br><br>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+      function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+              /*check if the item starts with the same letters as the text field value:*/
+              if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+              }
             }
         });
-
-        view.graphics.add({
-            symbol: {
-            type: "text",
-            color: "#7A003C",
-            text: "\ue61d", // esri-icon-map-pin
-            font: {
-                size: 30,
-                family: "CalciteWebCoreIcons"
-            }
-            },
-            geometry: {
-            type: "point",
-            latitude: <%-doctor.loc.y%>,
-            longitude: <%-doctor.loc.x%>
-            },
-            popupTemplate: {
-            title: "Doctors Address : "+ <%-JSON.stringify(doctor.address);%>
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+              /*If the arrow DOWN key is pressed,
+              increase the currentFocus variable:*/
+              currentFocus++;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 38) { //up
+              /*If the arrow UP key is pressed,
+              decrease the currentFocus variable:*/
+              currentFocus--;
+              /*and and make the current item more visible:*/
+              addActive(x);
+            } else if (e.keyCode == 13) {
+              /*If the ENTER key is pressed, prevent the form from being submitted,*/
+              e.preventDefault();
+              if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+              }
             }
         });
+        function addActive(x) {
+          /*a function to classify an item as "active":*/
+          if (!x) return false;
+          /*start by removing the "active" class on all items:*/
+          removeActive(x);
+          if (currentFocus >= x.length) currentFocus = 0;
+          if (currentFocus < 0) currentFocus = (x.length - 1);
+          /*add class "autocomplete-active":*/
+          x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+          /*a function to remove the "active" class from all autocomplete items:*/
+          for (var i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+          }
+        }
+        function closeAllLists(elmnt) {
+          /*close all autocomplete lists in the document,
+          except the one passed as an argument:*/
+          var x = document.getElementsByClassName("autocomplete-items");
+          for (var i = 0; i < x.length; i++) {
+            if (elmnt != x[i] && elmnt != inp) {
+              x[i].parentNode.removeChild(x[i]);
+            }
+          }
+        }
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
         });
-    </script>
-</body>
-</html>
+      }
+      const getTodos = async () => {
+          try {
+              const res = await axios.get(`http://localhost:3000/get_universities`);
+  
+              const todos = res.data.universities;
+  
+              countries = todos.map(u => u.fname);
+  
+              autocomplete(document.getElementById("myInput"), countries);
+          } catch (e) {
+              console.error(e);
+          }
+      };
+      /*An array containing all the country names in the world:*/
+      getTodos();
+      /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+      </script>
+<% include partials/footer %>

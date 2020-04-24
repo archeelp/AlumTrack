@@ -6,19 +6,175 @@
     .work {
         font-size: 150%;
     }
+    body{
+        background: white;
+    }
+    .demo{ background: #e5e5e5; }
+.our-team{
+    border: 2px solid black;
+    border-radius: 10px;
+    text-align: center;
+    margin: 10px;
+    z-index: 1;
+    position: relative;
+}
+.our-team:before,
+.our-team:after{
+    content: "";
+    width: 100%;
+    height: 104%;
+    background: black;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    z-index: -1;
+    transform: translateY(-50%) scaleX(0.3);
+    transition: all 0.3s ease 0s;
+}
+.our-team:after{
+    width: 106%;
+    left: 50%;
+    transform: translate(-50%, -50%) scaleY(0.25);
+}
+.our-team:hover:before{ transform: translateY(-50%) scaleX(0.7); }
+.our-team:hover:after{ transform: translate(-50%, -50%) scaleY(0.7); }
+.our-team img{
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: all 0.3s ease 0s;
+}
+.our-team .team-content{
+    width: 93%;
+    padding: 25px 0 10px;
+    background: black;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    opacity: 0;
+    -webkit-clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+    clip-path: polygon(0% 15%, 15% 15%, 15% 0%, 85% 0%, 85% 15%, 100% 15%, 100% 85%, 85% 85%, 85% 100%, 15% 100%, 15% 85%, 0% 85%);
+    transform: translateX(-50%);
+    transition: all 0.3s cubic-bezier(0.5, 0.2,0.1,0.9);
+}
+.our-team:hover .team-content{
+    bottom: 10px;
+    opacity: 1;
+}
+.our-team .title{
+    font-size: 25px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0;
+}
+.our-team .post{
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+.our-team .social{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.our-team .social li{
+    display: inline-block;
+    margin: 0 5px;
+}
+.our-team .social li a{
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 20px;
+    color: black;
+    transition: all 0.3s ease 0s;
+}
+.our-team .social li a:hover{
+    background: linear-gradient(to bottom,black, black);
+    box-shadow: 0 0 0 5px rgba(255,255,255,0.3);
+    color: #fff;
+}
+@media only screen and (max-width: 990px){
+    .our-team{ margin-bottom: 30px; }
+}
 </style>
-    <div class="container">
-        <legend style="text-align: center; font-size: 400%;">
-            Developers
-        </legend>
-        <ul>
-            <li class="dev">
-                Archeel Parekh: Full stack development
-            </li>
-                <br>
-            <li class="dev">
-                Yogesh Deshpande: Front end development
-            </li>
-        </ul>
+    <div class="container" style="padding-top: 3%;">
+        <div class="text-center">
+            
+            <div>
+                <h3>About Us</h3>
+                <h5>Welcome to Alum Track, India's largest professional network with nearly 10+ million users in more than 8 states in India.</h5>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <img width="80%" src="https://image.freepik.com/free-vector/businessman-using-telescope-top-mountain_24381-1045.jpg" alt="">
+                    <h4>Vision</h4>
+                    <h6>Create economic opportunity for every member of the global workforce.</h6>
+                </div>
+                <div class="col-md-6">
+                    <br>
+                    <img width="60%" height="60%" src="https://image.freepik.com/free-vector/man-holding-onto-launched-rocket_53876-43090.jpg" alt="">
+                    <h4 style="padding-top: 3%;">Mission</h4>
+                    <h6>The mission of LinkedIn is simple: connect the world’s professionals to make them more productive and successful.</h6>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <legend style="text-align: center; font-size: 400%;">
+                Team
+            </legend>
+            <div class="col-md-4 col-sm-6">
+                <div class="our-team">
+                    <img src="https://instagram.fbom12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/73512651_685436518649064_3296432020095238144_n.jpg?_nc_ht=instagram.fbom12-1.fna.fbcdn.net&_nc_ohc=7N8yKEYwwNAAX8qob3u&oh=c4f67e771909295ee4fa053b7718e1a5&oe=5ECD1D55">
+                    <div class="team-content">
+                        <h3 class="title">Archeel Parekh</h3>
+                        <span class="post">Backend Developer</span>
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="our-team">
+                    <img src="https://instagram.fbom12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/28158345_1203555366444536_1785263354844020736_n.jpg?_nc_ht=instagram.fbom12-1.fna.fbcdn.net&_nc_ohc=M1ovyJAYfeQAX-NXRna&oh=83f546fd0f6cbb13fb1459e6679af876&oe=5ECCB7B6">
+                    <div class="team-content">
+                        <h3 class="title">Aditya Patkar</h3>
+                        <span class="post">Frontend Developer</span>
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="our-team">
+                    <img src="https://instagram.fbom12-1.fna.fbcdn.net/v/t51.2885-19/s150x150/65306272_2088824264754459_6220894347366236160_n.jpg?_nc_ht=instagram.fbom12-1.fna.fbcdn.net&_nc_ohc=77cIikHMXZcAX_P1NOB&oh=1ba280c5fad84ef3a92da73ab27fbf52&oe=5ECB7CA3">
+                    <div class="team-content">
+                        <h3 class="title">Mohammed Mehdi</h3>
+                        <span class="post">Frontend Developer</span>
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <br><br>
 <% include partials/footer %>

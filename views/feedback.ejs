@@ -1,5 +1,19 @@
 <% include partials/header %>
-<style>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</head>
+<!-- <style>
     .container {
         text-align: center;
     }
@@ -24,8 +38,8 @@
     .container {
         width: 70%;
     }
-</style>
-<div class="container">
+</style> -->
+<!-- <div class="container">
     <div class="container">
     <h1><legend>Feedback Form</legend></h1>
     <form id="form" method="POST" action="/feedback">
@@ -38,5 +52,110 @@
         <button type="submit" class="btn btn-primary"><span>Submit</span></button>
     </form>
     </div>
-</div>
+</div> -->
+
+
+<body>
+    <div class="container contact">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="contact-info">
+                    <img src="https://image.ibb.co/kUASdV/contact-image.png" alt="image" />
+                    <h2>Contact Us</h2>
+                    <h4>We would love to hear from you !</h4>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="contact-form">
+                    <form action="/feedback" id='form' method="POST">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="fname">First Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="fname" placeholder="Enter First Name"
+                                name="fname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="lname">Last Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lname" placeholder="Enter Last Name"
+                                name="lname">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="email">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="comment">Comment:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="5" id="comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #25274d;
+    }
+
+    .contact {
+        padding: 4%;
+        height: 400px;
+    }
+
+    .col-md-3 {
+        background: #ff9b00;
+        padding: 4%;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+
+    .contact-info {
+        margin-top: 10%;
+    }
+
+    .contact-info img {
+        margin-bottom: 15%;
+    }
+
+    .contact-info h2 {
+        margin-bottom: 10%;
+    }
+
+    .col-md-9 {
+        background: #fff;
+        padding: 3%;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    .contact-form label {
+        font-weight: 600;
+    }
+
+    .contact-form button {
+        background: #25274d;
+        color: #fff;
+        font-weight: 600;
+        width: 25%;
+    }
+
+    .contact-form button:focus {
+        box-shadow: none;
+    }
+</style>
+
+
 <% include partials/footer %>

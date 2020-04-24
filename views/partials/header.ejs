@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>CLIINIC APP</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>ALUMTRACK</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
         <link rel="icon" href="https://previews.123rf.com/images/jroblesart/jroblesart1501/jroblesart150100031/35459605-medical-symbol-caduceus-with-snakes-and-wings.jpg" type="image/x-icon">
         <link href="https://fonts.googleapis.com/css?family=DM+Serif+Text&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Courgette&display=swap" rel="stylesheet">
+        <link rel="icon" href="http://geawings.com/free-icon/chat-app-icons-61.png" type="image/x-icon">
+        <link href="https://fonts.googleapis.com/css?family=DM+Serif+Text&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <style>
         #logo {
@@ -15,42 +24,64 @@
         a {
             font-size: 120%;
         }
+        body{
+            /* background:white; */
+            background: #7F7FD5; 
+	        background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5); 
+        }
     </style>
     <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a id="logo" class="navbar-brand" href="/">ClinicApp</a>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/doctors">View Doctors</a></li>
+        <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+            <a id="logo" class="navbar-brand" href="/">ALUMTRACK</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active"><a href="/alumni" class="nav-link">View Alumni</a></li>
+                    <li class="nav-item active"><a href="/search_alumni_by_filter" class="nav-link">Filter</a></li>
                     <% if(!currentuser){ %>
-                    <li><a href="/signin">Login</a></li>
-                    <li><a href="/signup">Sign-up</a></li>
+                    <li class="nav-item active"><a href="/signin" class="nav-link">Login</a></li>
+                    <li class="nav-item active"><a href="/signup" class="nav-link">Sign-up</a></li>
                     <% } else { 
-                        if(currentuser.type == "doctor"){ %>
-                            <li><a href="/doctors/<%=currentuser._id%>">Signed In As Dr <%= currentuser.fname %></a></li>
-                            <% if(!currentuser.description){ %>
-                            <li><a href="/details/<%= currentuser._id %>">Add Details</a></li>
+                        if(currentuser.type == "alumni"){ %>
+                            <% if(currentuser.description){ %>
+                            <li class="nav-item active"><a href="/alumni/<%=currentuser._id%>" class="nav-link">Signed In As <%= currentuser.fname %></a></li>
+                            <% }else{ %>
+                            <li class="nav-item active"><a href="/fill_details_alumni/<%= currentuser._id %>" class="nav-link">Add Details</a></li>
                             <% } %>
-                            <li><a href="/aplist">Appointments</a></li>
-                            <li><a href="/stats">Stats</a></li>
+                            <li class="nav-item active"><a href="/friends" class="nav-link">Friends</a></li>
+                            <li class="nav-item active"><a href="/recieved" class="nav-link">Requests</a></li>
+                            <li class="nav-item active"><a href="/network" class="nav-link">Network</a></li>
+                            <li class="nav-item active"><a href="/myblogs" class="nav-link">Myblogs</a></li>
                         <% } 
-                        if(currentuser.type == "patient"){ %>
-                            <li><a href="#">Signed In As <%= currentuser.fname %></a></li>
-                            <li><a href="/patienthome">My Appointments</a></li>
+                        if(currentuser.type == "university"){ %>
+                            <% if(currentuser.description){ %>
+                                <li class="nav-item active"><a href="/institute/<%=currentuser._id%>" class="nav-link">Signed In As <%= currentuser.fname %></a></li>
+                                <% }else{ %>
+                                <li class="nav-item active"><a href="/fill_details_institute/<%= currentuser._id %>" class="nav-link">Add Details</a></li>
+                                <% } %>
+                                <li class="nav-item active"><a href="/friends" class="nav-link">University Alumni</a></li>
+                                <li class="nav-item active"><a href="/recieved" class="nav-link">View Requests</a></li>
+                                <li class="nav-item active"><a href="/network" class="nav-link">Network</a></li>
+                                <li class="nav-item active"><a href="/myblogs" class="nav-link">University Blogs</a></li>
                         <% } 
                         if(currentuser.type == "admin"){ %>
-                            <li><a href="#">Signed In As Admin</a></li>
-                            <li><a href="/admin">Feedbacks</a></li>
+                            <li class="nav-item active"><a href="#" class="nav-link">Signed In As Admin</a></li>
+                            <li class="nav-item active"><a href="/admin" class="nav-link">Feedbacks</a></li>
                         <% } %>
-                    <li><a href="/logout">Logout</a></li>
+                    <li class="nav-item active"><a href="/chat" class="nav-link">Chat</a></li>
+                    <li class="nav-item active"><a href="/logout" class="nav-link">Logout</a></li>
                     <% } %>
                 </ul>
+                <form class="form-inline"  action="/alumni" method="GET">
+                    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Name" class="form-control">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
-        </div>
-    </nav>
+        </nav>
     <div class="container">
         
         <% if(error && error.length > 0){ %>
